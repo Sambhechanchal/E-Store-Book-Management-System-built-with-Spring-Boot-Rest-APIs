@@ -3,14 +3,16 @@ package com.nt.controller;
 import java.net.HttpURLConnection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nt.entity.CustomerEntity;
@@ -177,6 +179,23 @@ public class CustomerController {
 		
 		String msg = custService.deleteAllCustomer();
 		return " All customer record deleted successfully......!";
+	}
+	
+	@GetMapping("/getallcustomerwithpagination")
+	public ResponseEntity<ResponseMessage> getAllCustomerWithPage(@RequestParam int pagenumber, @RequestParam int pagesize, 
+			@RequestParam String field , @RequestParam String sortOrder ){
+		
+		if(pagenumber == -1 || pagesize == 0 || field == null || field.isEmpty() || sortOrder== null || sortOrder.isEmpty()) {
+			return ResponseEntity.ok(new ResponseMessage(HttpURLConnection.HTTP_BAD_REQUEST, Constants.FAILUER, "passing data should not be empty...!"));
+		}
+		Page<CustomerEntity> customerByPage = custService.getCustomerByPage(pagenumber, pagesize, field, sortOrder);
+		 
+		 if(customerByPage != null) {
+			 return ResponseEntity.ok(new ResponseMessage(HttpURLConnection.HTTP_OK,Constants.SUCCESS, "customer record fetch successfully ...!", customerByPage));
+		 }else {
+			 return ResponseEntity.ok(new ResponseMessage(HttpURLConnection.HTTP_BAD_REQUEST, Constants.FAILED, "Customer Record faild to Fetch...!"));
+		 }
+		
 	}
 	
 }

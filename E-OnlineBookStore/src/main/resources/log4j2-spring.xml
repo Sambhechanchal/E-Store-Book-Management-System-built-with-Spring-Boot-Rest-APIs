@@ -1,0 +1,18 @@
+<Configuration status="INFO">
+<Appenders>
+<!--  Console logs  -->
+<Console name="Console" target="SYSTEM_OUT">
+<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p [%t] %c{1} - %m%n"/>
+</Console>
+<!--  Splunk HEC Appender  -->
+<SplunkHttp name="Splunk" url="https://localhost:8088" token="2296e359-5680-47db-9a35-58a6693c78f0" host="localhost" index="order_apis_dev" type="raw" source="http-events-logs" sourcetype="log4j" messageFormat="text" disableCertificateValidation="true">
+<PatternLayout pattern="%m"/>
+</SplunkHttp>
+</Appenders>
+<Loggers>
+<Root level="info">
+<AppenderRef ref="Console"/>
+<AppenderRef ref="Splunk"/>
+</Root>
+</Loggers>
+</Configuration>

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.nt.model.ErrorMessage;
 import com.nt.utility.Constants;
 
 @ControllerAdvice

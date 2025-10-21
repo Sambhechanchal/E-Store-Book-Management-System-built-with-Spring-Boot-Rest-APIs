@@ -17,7 +17,7 @@ public interface IUserRegisterService {
 
 	public UserRegister checkUserDetails(UserRequestDto userRequestDto);
 
-	public UserRequest3Dto getUserDetails3(Integer id);
+	public UserRegister getUserDetails3(Integer id);
 
 	public UserRegister uploadMultiUserRegister(UserRequestDto userObject, MultipartFile[] files);
 

@@ -27,13 +27,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 @RestController
 public class BookController {
 
-	 Logger logger = LogManager.getLogger(CustomerController.class);
+	 Logger logger = LogManager.getLogger(BookController.class);
 	@Autowired
 	private IBookService bookService;
 	
 	// updat and save Book Record method
 	
-		@PostMapping("/createOrupdateCustomerRecord")
+		@PostMapping("/createOrupdateBookRecord")
 		@Operation(
 			    summary = "update or save  customer record",
 			    description = "update or save customer record",

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.nt.controller.CustomerController;
@@ -22,7 +23,7 @@ public class BookServiceImpl implements IBookService {
 	@Autowired
 	private BookRepository bookRepo;
 	
-	private static final Logger logger = LogManager.getLogger(CustomerController.class);
+	private static final Logger logger = LogManager.getLogger(BookServiceImpl.class);
 
 	@Override
 	public BookModule saveUpdateBookRecord(BookModule bookDto) {
@@ -56,6 +57,7 @@ logger.info("BookServiceImpl saveUpdateBookRecord method execution started..! ")
 	}
 
 	@Override
+	@Cacheable(cacheNames = "bookmodule" , key = "#id")
 	public BookModule getBookById(Long id) {
 		logger.info("CustomerServiceImpl getCustomerEntity method execution started..! ");
 		Optional<BookModule> opt = bookRepo.findById(id);
@@ -68,6 +70,7 @@ logger.info("BookServiceImpl saveUpdateBookRecord method execution started..! ")
 	}
 
 	@Override
+	@Cacheable(value = "getAllBook")
 	public List<BookModule> getAllBookRecord() {
 		logger.info("BookServiceImpl getAllBookRecord method execution started..! ");
 		logger.info("BookServiceImpl getAllBookRecord method execution ended..! ");

@@ -28,8 +28,8 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.ok(err);
 	}
 	
-	@ExceptionHandler(BookNotFoundException.class)
-	public ResponseEntity<Object> handleException(BookNotFoundException ex){
+	@ExceptionHandler(BookIdNotFoundException.class)
+	public ResponseEntity<Object> handleException(BookIdNotFoundException ex){
 		
 		// using HashMap
 		Map<String, Object> list = new HashMap<>();

@@ -3,6 +3,7 @@ package com.nt.controller;
 import java.net.HttpURLConnection;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,9 @@ public class UserRegisterController {
 	@Autowired
 	private IUserRegisterService userRegisterService;
 	
-	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserRegisterController.class);
-
+	//private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserRegisterController.class);
+	private static final Logger logger = LogManager.getLogger(CustomerController.class);
+	
 	@PostMapping("/userregister")
 	@Operation(
 	    summary = "Add new user",

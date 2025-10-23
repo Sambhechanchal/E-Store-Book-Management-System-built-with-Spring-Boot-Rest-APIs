@@ -4,12 +4,15 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nt.controller.CustomerController;
 import com.nt.entity.FileEntity;
 import com.nt.entity.UserRegister;
 import com.nt.model.UserRequest;
@@ -28,7 +31,9 @@ public class UserRegisterServiceImpl implements IUserRegisterService {
 	@Autowired
 	private  FileRepository fileRepo;
 	
-	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(FileMngtServiceImpl.class);
+	//private static final org.slf4j.Logger logger = LoggerFactory.getLogger(FileMngtServiceImpl.class);
+	
+	private static final Logger logger = LogManager.getLogger(CustomerController.class);
 	
 	@Override
 	public UserRegister insertUserRegister(UserRequestDto userDto) {

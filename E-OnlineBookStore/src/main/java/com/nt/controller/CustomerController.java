@@ -1,11 +1,10 @@
 package com.nt.controller;
 
 import java.net.HttpURLConnection;
-
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +33,9 @@ public class CustomerController {
 	@Autowired
 	private ICustomerService custService;
 	
-	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CustomerController.class);
+	//private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CustomerController.class);
 	
+    Logger logger = LogManager.getLogger(CustomerController.class);
 	// saveCustomer(cust) method
 	
 	@PostMapping("/savecustomer")

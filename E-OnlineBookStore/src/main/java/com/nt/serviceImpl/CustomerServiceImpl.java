@@ -6,11 +6,14 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import com.nt.controller.CustomerController;
 import com.nt.entity.CustomerEntity;
 import com.nt.exception.CustomerIdNotFoundException;
 import com.nt.repository.CustomerRepo;
@@ -24,8 +27,10 @@ public class CustomerServiceImpl  implements ICustomerService{
 	@Autowired
 	private CustomerRepo custRepo;
 	
-	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+//	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
+	private static final Logger logger = LogManager.getLogger(CustomerController.class);
+	
 	@Override
 	public CustomerEntity saveCustomerRecord(CustomerEntity cust) {
 		logger.info("CustomerServiceImpl saveCustomerRecord method execution started..! ");

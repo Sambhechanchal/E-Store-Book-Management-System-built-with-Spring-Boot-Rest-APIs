@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -31,8 +33,8 @@ public class FileController {
 	@Autowired
 	private IFileMngtService fileService;
 	
-	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(FileController.class);
-
+	//private static final org.slf4j.Logger logger = LoggerFactory.getLogger(FileController.class);
+private static final Logger logger = LogManager.getLogger(CustomerController.class);
 	@PostMapping(value="/uploadfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Operation(
 		    summary = "Add new File",

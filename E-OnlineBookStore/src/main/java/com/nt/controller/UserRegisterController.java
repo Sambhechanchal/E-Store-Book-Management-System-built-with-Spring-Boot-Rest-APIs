@@ -168,7 +168,7 @@ public class UserRegisterController {
 	
 
 	@PostMapping("/userregisteruploadmultifile")
-	public ResponseEntity<ResponseMessage> postMethodName(@RequestParam String jsonData , @RequestParam MultipartFile[] files) {
+	public ResponseEntity<ResponseMessage> saveUserWithFiles(@RequestParam String jsonData , @RequestParam MultipartFile[] files) {
 	 logger.info("UserRegisterController postMethodName methods execution started..!");
 		try {
 			logger.info("Converting JSON data input to java object..");
@@ -197,10 +197,12 @@ public class UserRegisterController {
 	
 	@GetMapping("/getallusersdetails")
 	
-	public List<UserRegister> getAllUsersDetailsData() {
+	public ResponseEntity<ResponseMessage> getAllUsersDetailsData() {
 		logger.info("UserRegisterController getAllUsersDetailsData methods execution started..!");
+		List<UserRegister> allUserRegisterData = userRegisterService.getAllUserRegisterData();
 		logger.info("UserRegisterController getAllUsersDetailsData methods execution ended..!");
-		return userRegisterService.getAllUserRegisterData();
+		return  ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(HttpURLConnection.HTTP_OK, Constants.SUCCESS, "All User Data get Successfully", allUserRegisterData));
+		//return userRegisterService.getAllUserRegisterData();
 	}
 	
 

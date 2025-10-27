@@ -1,10 +1,13 @@
 package com.nt.controller;
 
 import java.net.HttpURLConnection;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -142,7 +145,7 @@ public class CustomerController {
 			CustomerEntity updateCustomerRecord = custService.updateCustomerRecord(cust);
 			  if(cust.getId()==null) {
 				  logger.info("customer object is saved and method execution ended...!");
-				  return ResponseEntity.ok(new ResponseMessage(HttpURLConnection.HTTP_CREATED, Constants.SUCCESS , "Customer Record saved successfuly ....!", updateCustomerRecord)); 
+				  return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage(HttpURLConnection.HTTP_CREATED, Constants.SUCCESS , "Customer Record saved successfuly ....!", updateCustomerRecord)); 
 			  }else {
 				  logger.info("customer onject is updated..!");
 				  logger.info("CustomerController updateCustRecord method execution is ended..!");
@@ -184,7 +187,7 @@ public class CustomerController {
 		        @ApiResponse(responseCode = "500", description = "Internal server error")
 		    }
 		)
-	public Iterable<CustomerEntity> getAllCustomer() {
+	public List<CustomerEntity> getAllCustomer() {
 		return custService.getAllCustomerEntity();
 	}
 	

@@ -82,7 +82,7 @@ public class CustomerServiceImpl  implements ICustomerService{
 	}
 
 	@Override
-	public Iterable<CustomerEntity> getAllCustomerEntity() {
+	public List<CustomerEntity> getAllCustomerEntity() {
 		logger.info("CustomerServiceImpl getAllCustomerEntity method execution started..! ");
 		logger.info("CustomerServiceImpl getAllCustomerEntity method execution ended..! ");
 		return custRepo.findAll();

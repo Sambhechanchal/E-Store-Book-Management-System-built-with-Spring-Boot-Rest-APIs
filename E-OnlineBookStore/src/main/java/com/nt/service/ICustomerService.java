@@ -1,7 +1,8 @@
 package com.nt.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
 import com.nt.entity.CustomerEntity;
 
@@ -13,7 +14,7 @@ public interface ICustomerService {
 
 	public CustomerEntity getCustomerEntity(Long id);
 
-	public Iterable<CustomerEntity> getAllCustomerEntity();
+	public List<CustomerEntity>  getAllCustomerEntity();
 
 	public CustomerEntity deleteCustomer(Long id);
 

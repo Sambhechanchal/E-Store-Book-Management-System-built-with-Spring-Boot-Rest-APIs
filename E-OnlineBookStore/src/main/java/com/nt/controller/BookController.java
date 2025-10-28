@@ -113,11 +113,11 @@ public class BookController {
 			        @ApiResponse(responseCode = "500", description = "Internal server error")
 			    }
 			)
-		public String deleteBookById(@PathVariable Long id) {
+		public  ResponseEntity<ResponseMessage> deleteBookById(@PathVariable Long id) {
 			logger.info("BookController deleteBookById method execution is started..!");
 			BookModule deleteBook = bookService.deleteBooKRecordById(id);
 			logger.info("BookController deleteBookById method execution is started..!");
-			return  deleteBook +" customer record deleted....!";
+			return  ResponseEntity.ok(new ResponseMessage(HttpURLConnection.HTTP_OK, Constants.SUCCESS, " customer record deleted....!",deleteBook  ));
 		}
 
 		// delete method

@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import com.nt.controller.CustomerController;
 import com.nt.entity.BookModule;
 import com.nt.entity.CustomerEntity;
+import com.nt.entity.mongo.BookModuleMongo;
 import com.nt.exception.BookIdNotFoundException;
 import com.nt.exception.CustomerIdNotFoundException;
 import com.nt.repository.BookRepository;
+import com.nt.repository.mongo.BookMongoRepository;
 import com.nt.service.IBookService;
 
 @Service
@@ -22,6 +24,9 @@ public class BookServiceImpl implements IBookService {
 	
 	@Autowired
 	private BookRepository bookRepo;
+	
+	@Autowired
+	private BookMongoRepository bookMongoRepo;
 	
 	private static final Logger logger = LogManager.getLogger(BookServiceImpl.class);
 
@@ -44,7 +49,15 @@ logger.info("BookServiceImpl saveUpdateBookRecord method execution started..! ")
 		    	book.setBookTitle(opt.get().getBookTitle());
 		    	 
 		    	 bookRepo.save(book);
-		    	logger.info("book data saved successfully...! ");
+		    	logger.info("book data saved in mysql successfully...! ");
+		    	
+		    	// Mongo db insertion operation
+		    	BookModuleMongo bookMongo = new BookModuleMongo();
+		    	bookMongo.setBookName(opt.get().getBookName());
+		    	bookMongo.setAuthor(opt.get().getAuthor());
+		    	bookMongo.setBookTitle(opt.get().getBookTitle());
+		    	bookMongoRepo.save(bookMongo);
+		    	logger.info("book data saved into mongo successfully...! ");
 		     }else {
 		    	 logger.error("error occur during validating optional object");
 		    	 throw new BookIdNotFoundException("Invalid book Id...!");

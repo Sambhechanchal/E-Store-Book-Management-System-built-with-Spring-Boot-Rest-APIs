@@ -15,8 +15,10 @@ import org.springframework.stereotype.Service;
 
 import com.nt.controller.CustomerController;
 import com.nt.entity.CustomerEntity;
+import com.nt.entity.mongo.CustomerEntityMongo;
 import com.nt.exception.CustomerIdNotFoundException;
 import com.nt.repository.CustomerRepo;
+import com.nt.repository.mongo.CustomerMongoRepo;
 import com.nt.service.ICustomerService;
 
 //@Profile({"dev"})
@@ -27,6 +29,9 @@ public class CustomerServiceImpl  implements ICustomerService{
 	@Autowired
 	private CustomerRepo custRepo;
 	
+	@Autowired
+	private CustomerMongoRepo custMongoRepo;
+	
 //	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
 	private static final Logger logger = LogManager.getLogger(CustomerController.class);
@@ -35,6 +40,13 @@ public class CustomerServiceImpl  implements ICustomerService{
 	public CustomerEntity saveCustomerRecord(CustomerEntity cust) {
 		logger.info("CustomerServiceImpl saveCustomerRecord method execution started..! ");
 		 CustomerEntity save = custRepo.save(cust);
+		 
+		 // insert customer object to mongo db
+		 CustomerEntityMongo custMongo = new CustomerEntityMongo();
+		 custMongo.setName(cust.getName());
+		 custMongo.setEmail(cust.getEmail());
+		 
+		 custMongoRepo.save(custMongo);
 		 logger.info("CustomerServiceImpl saveCustomerRecord method execution ended...! ");
 		return save;
 	}

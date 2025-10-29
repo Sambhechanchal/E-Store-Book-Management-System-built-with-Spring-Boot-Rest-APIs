@@ -15,11 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nt.controller.CustomerController;
 import com.nt.entity.FileEntity;
 import com.nt.entity.UserRegister;
+import com.nt.entity.mongo.UserRegisterMongo;
 import com.nt.model.UserRequest;
 import com.nt.model.UserRequest3Dto;
 import com.nt.model.UserRequestDto;
 import com.nt.repository.FileRepository;
 import com.nt.repository.UserRegisterRepo;
+import com.nt.repository.mongo.UserRegisterMongoRepo;
 import com.nt.service.IUserRegisterService;
 
 @Service
@@ -30,6 +32,8 @@ public class UserRegisterServiceImpl implements IUserRegisterService {
 	
 	@Autowired
 	private  FileRepository fileRepo;
+	@Autowired
+	private UserRegisterMongoRepo userMongoRepo;
 	
 	//private static final org.slf4j.Logger logger = LoggerFactory.getLogger(FileMngtServiceImpl.class);
 	
@@ -52,6 +56,16 @@ public class UserRegisterServiceImpl implements IUserRegisterService {
 			userRepo.save(user);
 			logger.info("insertUserRegister method inserted data successfully..!");
 			
+			// for mongo db
+			UserRegisterMongo userMongo = new UserRegisterMongo();
+			userMongo.setFirstName(userDto.getFirstName());
+			userMongo.setLastName(userDto.getLastName());
+			userMongo.setEmail(userDto.getEmail());
+			// encrypting the password before storing into database
+			userMongo.setPassword(Base64.getEncoder().encodeToString(userDto.getPassword().getBytes()));
+			userMongo.setContactId(userDto.getContactId());
+			userMongoRepo.save(userMongo);
+			logger.info("insertUserRegister method inserted data  to mongodb successfully..!");
 		}catch(Exception e) {
 			logger.error("Error occur during inserting data to database.... "+e.getMessage());
 			e.printStackTrace();

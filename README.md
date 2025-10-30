@@ -47,6 +47,5 @@ Oracle
 MongoDB (Secondary)
 
 **Deployed On Docker:**
-link: http://localhost:8080
-or on cmd prompt link:
-http://localhost:9090
+link: http://localhost:8080/swagger-ui.html
+

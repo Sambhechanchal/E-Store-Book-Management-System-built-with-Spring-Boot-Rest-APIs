@@ -39,3 +39,14 @@ Controller/Service layer test coverage
 **API Documentation:**
 Swagger / OpenAPI UI
 Postman collections used for validation
+
+**Database Configuration**
+application.properties / application.yml includes separate configs for:
+MySQL (Primary)
+Oracle
+MongoDB (Secondary)
+
+**Deployed On Docker:**
+link: http://localhost:8080
+or on cmd prompt link:
+http://localhost:9090

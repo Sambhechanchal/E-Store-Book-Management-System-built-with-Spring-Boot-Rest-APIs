@@ -36,8 +36,17 @@ logger.info("BookServiceImpl saveUpdateBookRecord method execution started..! ")
 		
 		logger.error("ID should not be null or empty");
 		if(bookDto.getId() == null) {
+			// Mongo db insertion operation
+	    	BookModuleMongo bookMongo = new BookModuleMongo();
+	    	bookMongo.setBookName(bookDto.getBookName());
+	    	bookMongo.setAuthor(bookDto.getAuthor());
+	    	bookMongo.setBookTitle(bookDto.getBookTitle());
+	    	bookMongoRepo.save(bookMongo);
+	    	logger.info("book data saved into mongo successfully...! ");
+
 			
 			 return bookRepo.save(bookDto);
+			 
 		}else {
 		     Optional<BookModule> opt = bookRepo.findById(bookDto.getId());
 		   

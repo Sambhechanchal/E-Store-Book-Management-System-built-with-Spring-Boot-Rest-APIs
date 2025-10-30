@@ -18,10 +18,11 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 
-@Data
+
 @Document(collection="user_register")
+@Data
 @AllArgsConstructor  
-@NoArgsConstructor
+//@NoArgsConstructor
 
 public class UserRegisterMongo {
 	
@@ -33,6 +34,8 @@ public class UserRegisterMongo {
     private String password;
 	private long contactId;
 
-	
+	public UserRegisterMongo(){
+		System.out.println("userRegisterMongoBD object created");
+	}
   
 }

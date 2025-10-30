@@ -47,6 +47,7 @@ public class CustomerServiceImpl  implements ICustomerService{
 		 custMongo.setEmail(cust.getEmail());
 		 
 		 custMongoRepo.save(custMongo);
+		 System.out.println("mongo data saved successfully..!");
 		 logger.info("CustomerServiceImpl saveCustomerRecord method execution ended...! ");
 		return save;
 	}
